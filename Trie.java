@@ -89,17 +89,18 @@ class Trie {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < current.count; i++) {
             TrieNode child = current.childList.get(i);
-            char[] word = new char[50];
-            int j=0;
+            //String word = "";
+            StringBuilder word = new StringBuilder();
             do {
-                word[j] = child.content;
-                j++;
+               // word += child.content;
+                word.append(child.content);
                 child = child.childList.getFirst();
             } while (!child.childList.isEmpty());
-            word[j] = child.content;
+           // word += child.content;
+            word.append(child.content);
             result.append(", ").append(pref).append(word);
-            if (result.length() > 1) result.delete(0, 2);
         }
+        if (result.length() > 1) result.delete(0, 2);
         return result.toString();
     }
 
