@@ -1,4 +1,3 @@
-import sun.reflect.generics.tree.Tree;
 
 import java.util.*;
 
@@ -6,13 +5,12 @@ class TrieNode {
     public char content;
     public boolean isEnd;
     public int count;
-    LinkedList<TrieNode> childList;
+    ArrayList<TrieNode> childList;
 
     TrieNode(char c) {
-        childList = new LinkedList<TrieNode>();
+        childList = new ArrayList<TrieNode>();
         isEnd = false;
         content = c;
-        count = 0;
     }
 
     TrieNode subNode(char c) {               // Ищет у родителя дочернюю ветку с входным параметром char и выводит дочернюю ветку или null если ее нет
@@ -25,7 +23,7 @@ class TrieNode {
 }
 
 class Trie {
-    public TrieNode root;
+    private TrieNode root;
 
     Trie() {
         root = new TrieNode(' ');
@@ -89,15 +87,12 @@ class Trie {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < current.count; i++) {
             TrieNode child = current.childList.get(i);
-            //String word = "";
-            StringBuilder word = new StringBuilder();
+              String word = "";
             do {
-               // word += child.content;
-                word.append(child.content);
-                child = child.childList.getFirst();
+                word += child.content;
+                child = child.childList.get(0);
             } while (!child.childList.isEmpty());
-           // word += child.content;
-            word.append(child.content);
+              word += child.content;
             result.append(", ").append(pref).append(word);
         }
         if (result.length() > 1) result.delete(0, 2);
